@@ -1,0 +1,25 @@
+﻿@model OBarbeiro.Modelo.Modelos.Profissional
+
+@{
+    ViewData["Title"] = "Edição";
+}
+
+<h4 class="text-success">Editar cadastro de profissional</h4>
+<hr class="bg-white" />
+
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Edit">
+            <partial name="_Formulario" />
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    {await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.idCadastro').attr('readonly', true)
+        });
+    </script>
+}

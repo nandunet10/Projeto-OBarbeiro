@@ -1,0 +1,27 @@
+﻿@*@model OBarbeiro.Modelo.Modelos.Empresa
+
+@{
+    ViewData["Title"] = "Edit";
+}
+<h4 class="text-success">Editar cadastro de empresa</h4>
+<hr class="bg-white" />
+
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Edit">
+            <input asp-for="Email" type="hidden" />
+            <input asp-for="DataInclusao" type="hidden" />
+            <input asp-for="DataAlteracao" type="hidden" />
+            <partial name="_Formulario" />
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.idCadastro').attr('readonly', true)
+        });
+    </script>
+}
+*@

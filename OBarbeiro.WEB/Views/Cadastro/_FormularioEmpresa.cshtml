@@ -1,0 +1,185 @@
+﻿@model OBarbeiro.Comum.Modelos.CadastroEmpresaViewModel
+
+<div class="card">
+    <div class="card-header">Dados base</div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-2">
+                <div class="form-group">
+                    <label asp-for="PerfilUsuarioId" class="control-label">Perfil de usuário</label>
+                    <select asp-for="PerfilUsuarioId" asp-items="ViewBag.PerfilsUsuario" class="form-control idCadastro"></select>
+                    <span asp-validation-for="PerfilUsuarioId" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="col-5">
+                <div class="form-group">
+                    <label asp-for="Nome" class="control-label">Nome do Responsável</label>
+                    <input asp-for="Nome" name="Nome" id="Nome" class="form-control" placeholder="Nome" />
+                    <span asp-validation-for="Nome" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="col-5">
+                <div class="form-group">
+                    <label asp-for="NomeBarbearia" class="control-label">Nome da Barbearia</label>
+                    <input asp-for="NomeBarbearia" name="NomeBarbearia" id="NomeBarbearia" class="form-control" placeholder="Nome da Barbearia" />
+                    <span asp-validation-for="NomeBarbearia" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <br />
+
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label asp-for="Celular" class="control-label">Celular</label>
+                    <input asp-for="Celular" name="Celular" id="Celular" class="form-control maskCelular" placeholder="Celular" />
+                    <span asp-validation-for="Celular" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="form-group">
+                    <label asp-for="Telefone" class="control-label">Telefone</label>
+                    <input asp-for="Telefone" name="Telefone" id="Telefone" class="form-control maskTelefone" placeholder="Telefone" />
+                    <span asp-validation-for="Telefone" class="text-danger"></span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="card-header">Dados de login</div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-4">
+                <div class="form-group">
+                    <label asp-for="Email" class="control-label">E-mail Para Acesso*</label>
+                    <input asp-for="Email" name="email" id="email" class="form-control" placeholder="E-mail" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="col-4">
+                <div class="form-group">
+                    <label asp-for="Senha" class="control-label">Senha (Mínimo de 6 e máximo de 15 caracteres)*</label>
+                    <input asp-for="Senha" name="senha" id="senha" class="form-control" type="password" placeholder="Senha" />
+                    <span asp-validation-for="Senha" id="erroSenha" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="col-4">
+                <div>
+                    <label class="control-label">Confirmação Senha</label>
+                    <input id="senhaC" class="form-control" type="password" placeholder="Confirmar Senha" />
+                    <span id="erroSenhaC" class="text-danger">As senhas não conferem</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="card-header">Endereço</div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-2">
+                <div class="form-group">
+                    <label asp-for="Cep" class="control-label">CEP</label>
+                    <input asp-for="Cep" name="Cep" id="Cep" class="form-control" placeholder="CEP" />
+                    <span asp-validation-for="Cep" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="col-8">
+                <div class="form-group">
+                    <label asp-for="Logradouro" class="control-label">Logradouro</label>
+                    <input asp-for="Logradouro" name="Logradouro" id="Logradouro" class="form-control" placeholder="Logradouro" />
+                    <span asp-validation-for="Logradouro" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="col-2">
+                <div class="form-group">
+                    <label asp-for="Numero" class="control-label">Numero</label>
+                    <input asp-for="Numero" name="Numero" id="Numero" class="form-control" placeholder="Numero" />
+                    <span asp-validation-for="Numero" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <br />
+        <div class="row">
+            <div class="col-5">
+                <div class="form-group">
+                    <label asp-for="Complemento" class="control-label">Complemento</label>
+                    <input asp-for="Complemento" name="Complemento" id="Complemento" class="form-control" placeholder="Complemento" />
+                    <span asp-validation-for="Complemento" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="col-5">
+                <div class="form-group">
+                    <label asp-for="Cidade" class="control-label">Cidade</label>
+                    <input asp-for="Cidade" name="Cidade" id="Cidade" class="form-control" placeholder="Cidade" />
+                    <span asp-validation-for="Cidade" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="col-2">
+                <div class="form-group">
+                    <label asp-for="UF" class="control-label">UF</label>
+                    <select asp-for="UF" name="UF" id="UF" class="form-control" placeholder="UF">
+                        <option value="AC">Acre</option>
+                        <option value="AL">Alagoas</option>
+                        <option value="AP">Amapá</option>
+                        <option value="AM">Amazonas</option>
+                        <option value="BA">Bahia</option>
+                        <option value="CE">Ceará</option>
+                        <option value="DF">Distrito Federal</option>
+                        <option value="ES">Espírito Santo</option>
+                        <option value="GO">Goiás</option>
+                        <option value="MA">Maranhão</option>
+                        <option value="MT">Mato Grosso</option>
+                        <option value="MS">Mato Grosso do Sul</option>
+                        <option value="MG">Minas Gerais</option>
+                        <option value="PA">Pará</option>
+                        <option value="PB">Paraíba</option>
+                        <option value="PR">Paraná</option>
+                        <option value="PE">Pernambuco</option>
+                        <option value="PI">Piauí</option>
+                        <option value="RJ">Rio de Janeiro</option>
+                        <option value="RN">Rio Grande do Norte</option>
+                        <option value="RS">Rio Grande do Sul</option>
+                        <option value="RO">Rondônia</option>
+                        <option value="RR">Roraima</option>
+                        <option value="SC">Santa Catarina</option>
+                        <option value="SP">São Paulo</option>
+                        <option value="SE">Sergipe</option>
+                        <option value="TO">Tocantins</option>
+                        <option value="EX">Estrangeiro</option>
+                    </select>
+                    <span asp-validation-for="UF" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="card-footer">
+        <div class="row actions justify-content-start">
+            <div class="col-md-1">
+                <div class="form-group">
+                    <a asp-action="Index" class="btn btn-outline-info">Voltar</a>
+                </div>
+            </div>
+            <div class="col-md-1">
+                <div class="form-group">
+                    <input type="submit" value="Salvar" class="btn btn-outline-success salvar" $event />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

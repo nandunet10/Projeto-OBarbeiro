@@ -1,0 +1,60 @@
+﻿@model OBarbeiro.Modelo.Modelos.Servico
+
+<div class="card">
+    <div class="card-header">Dados</div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label asp-for="EmpresaEmail" class="control-label">Informe seu E-mail</label>
+                    <input asp-for="EmpresaEmail" class="form-control idCadastro" />
+                    <span asp-validation-for="EmpresaEmail" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="Descricao" class="control-label"></label>
+                    <input asp-for="Descricao" class="form-control" />
+                    <span asp-validation-for="Descricao" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="Preco" class="control-label">Preço</label>
+                    <input asp-for="Preco" class="form-control" />
+                    <span asp-validation-for="Preco" class="text-danger"></span>
+                </div>
+            </div>  
+        </div>
+
+        <br />
+        <div class="row text-start">
+            <div class="col-md-2">
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="Ativo" /> @Html.DisplayNameFor(model => model.Ativo)
+                    </label>
+                </div>
+            </div>
+
+        </div>
+        <br />
+    </div>
+
+    <div class="card-footer">
+        <div class="row actions justify-content-start">
+            <div class="col-md-1">
+                <div class="form-group">
+                    <a asp-action="index" class="btn btn-outline-info">voltar</a>
+                </div>
+            </div>
+            <div class="col-md-1">
+                <div class="form-group">
+                    <input type="submit" value="salvar" class="btn btn-outline-success" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

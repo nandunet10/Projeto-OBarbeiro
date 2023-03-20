@@ -1,0 +1,71 @@
+﻿@model IEnumerable<OBarbeiro.Modelo.Modelos.Agendamento>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="row">
+    <div class="col-md-2">
+        <p>
+            <a asp-action="Create" class="btn btn-outline-success">Novo</a>
+        </p>
+    </div>
+    <div class="col-md-7">
+        <h3 style="text-align: center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                 class="bi bi-person-fill" viewBox="0 0 16 16">
+                <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+            </svg> Agendamentos
+        </h3>
+    </div>
+</div>
+
+<table class="table" id="minhaTabela">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AgendamentoId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataAgendamento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AgendamentoStatus)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AgendamentoId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataAgendamento)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AgendamentoStatus)
+                </td>
+                <td class="row-cols-md-12">
+                    @Html.ActionLink("Alterar", "Edit", new {  Id=item.AgendamentoId  }, new {@class = "btn btn-outline-warning m-1"})
+                    @Html.ActionLink("Detalhes", "Details", new { Id=item.AgendamentoId  }, new {@class = "btn btn-outline-info m-1"})
+                    @Html.ActionLink("Excluir", "Delete", new { Id=item.AgendamentoId  }, new {@class = "btn btn-outline-danger m-1"})
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#minhaTabela').DataTable({
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/f2c75b7247b/i18n/Portuguese-Brasil.json"
+                }
+            });
+        });
+    </script>
+}

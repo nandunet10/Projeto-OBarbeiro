@@ -1,0 +1,126 @@
+﻿@using System.Security.Claims;
+@model IEnumerable<OBarbeiro.Modelo.Modelos.Cliente>
+
+@{
+    ViewData["Title"] = "Tela inicial";
+}
+
+<div class="row">
+    <div class="col-md-2">
+        <p>
+            <a asp-action="Create" class="btn btn-outline-success">Novo</a>
+        </p>
+    </div>
+    <div class="col-md-7">
+        <h3 style="text-align: center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                 class="bi bi-person-fill" viewBox="0 0 16 16">
+                <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+            </svg> Clientes
+        </h3>
+    </div>
+</div>
+
+
+<table class="table" id="minhaTabela">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Celular)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ativo)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Celular)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ativo)
+                </td>
+                <td class="row-cols-md-12">
+                    @Html.ActionLink("Alterar", "Edit", new {  Email=item.Email  }, new {@class = "btn btn-outline-warning m-1"})
+                    @Html.ActionLink("Detalhes", "Details", new { Email=item.Email  }, new {@class = "btn btn-outline-info m-1"})
+                    @if (User.Claims.Where(c => c.Type == ClaimTypes.Role).Select(c => c.Value).FirstOrDefault() == "admin")
+                    {
+                        <a asp-action="#" class="btn btn-outline-danger m-1" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-id="@item.Email" data-bs-nome="@item.Nome">Delete</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Excluir cliente</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="divModalTexto" class="mb-3">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Fechar</button>
+                <a asp-controller="#" asp-action="Delete" class="btn btn-outline-danger m-1">Delete</a>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#minhaTabela').DataTable({
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/f2c75b7247b/i18n/Portuguese-Brasil.json"
+                }
+            });
+        });
+    </script>
+
+
+    <script type="text/javascript">
+
+        var exampleModal = document.getElementById('exampleModal')
+        exampleModal.addEventListener('show.bs.modal', function (event) {
+
+            var button = event.relatedTarget
+
+            var id = button.getAttribute('data-bs-id')
+            var descricao = button.getAttribute('data-bs-nome')
+
+            var modalBodyDiv = exampleModal.querySelector('.modal-body div')
+
+            modalBodyDiv.innerHTML = "Deseja confirmar a exclusão de <b>" + descricao + "?</b>"
+                + "<br /> Não será possivél recuperar o registro após a exclusão do mesmo!"
+
+            var modalFooterDiv = exampleModal.querySelector('.modal-footer a')
+            modalFooterDiv.href = "/Cliente/Delete?Cpf=" + id
+        })
+
+    </script>
+}

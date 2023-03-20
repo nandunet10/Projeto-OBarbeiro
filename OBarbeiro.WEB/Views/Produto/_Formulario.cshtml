@@ -1,0 +1,64 @@
+﻿@model OBarbeiro.Modelo.Modelos.Produto
+
+<div class="card">
+    <div class="card-header">Dados</div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label asp-for="EmpresaEmail" class="control-label">Informe seu E-mail</label>
+                    <input asp-for="EmpresaEmail" class="form-control idcadastro" />
+                    <span asp-validation-for="EmpresaEmail" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label asp-for="Descricao" class="control-label"></label>
+                    <input asp-for="Descricao" class="form-control" />
+                    <span asp-validation-for="Descricao" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label asp-for="ValorUnitario" class="control-label">Preço</label>
+                    <input asp-for="ValorUnitario" class="form-control" />
+                    <span asp-validation-for="ValorUnitario" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label asp-for="Quantidade" class="control-label">Quantidade</label>
+                    <input asp-for="Quantidade" class="form-control" />
+                    <span asp-validation-for="Quantidade" class="text-danger"></span>
+                </div>
+            </div>
+
+            <br />
+            <div class="col-md-2 mt-4">
+                <div class="form-group form-check">
+                    <label class="control-label">
+                        <input asp-for="Ativo" class="form-check-input" /> @Html.DisplayNameFor(model => model.Ativo)
+                    </label>
+                </div>
+            </div>
+        </div>
+        <br />
+
+        <div class="card-footer">
+            <div class="row actions justify-content-start">
+                <div class="col-md-1">
+                    <div class="form-group">
+                        <a asp-action="index" class="btn btn-outline-info">voltar</a>
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div class="form-group">
+                        <input type="submit" value="salvar" class="btn btn-outline-success" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

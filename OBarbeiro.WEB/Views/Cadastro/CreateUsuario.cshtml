@@ -1,0 +1,43 @@
+﻿@model OBarbeiro.Comum.Modelos.CadastroClienteViewModel
+
+@{
+    ViewData["Title"] = "Cadastro de cliente";
+}
+
+<h4 class="text-center text-success">Cadastre-se Já!</h4>
+<hr class="bg-white" />
+
+<div class="col-md-12">
+    <form asp-action="CreateUsuario">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <partial name="_FormularioCliente" />
+    </form>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#erroSenhaC').hide();
+            $('.salvar').click(function (event) {
+
+                console.log($('#senha').val())
+                console.log($('#senhaC').val())
+
+                if ($('#senha').val() != $('#senhaC').val()) {
+                    $('#senhaC').next().show();
+                    event.preventDefault();
+                }
+                else {
+                    $('#senhaC').next().hide();
+                }
+
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.idCadastro').attr('disabled', true)
+        });
+    </script>
+}

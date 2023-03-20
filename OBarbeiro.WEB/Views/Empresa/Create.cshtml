@@ -1,0 +1,21 @@
+﻿@*@model OBarbeiro.Modelo.Modelos.Empresa
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h4 class="text-success align-content-center">Cadastro de empresa</h4>
+
+<hr class="bg-white" />
+<div class="col-md-12">
+    <form asp-action="Create">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input asp-for="Ativo" type="hidden" />
+        <partial name="_Formulario" />
+    </form>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+*@

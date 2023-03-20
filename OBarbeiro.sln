@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33205.214
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OBarbeiro.Modelo", "OBarbeiro.Modelo\OBarbeiro.Modelo.csproj", "{0CA52684-BB86-4DC7-9C64-8489EA789415}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OBarbeiro.Infra", "OBarbeiro.Infra\OBarbeiro.Infra.csproj", "{460CDB0D-07D2-478C-8B50-D947DCCB857B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OBarbeiro.Negocio", "OBarbeiro.Negocio\OBarbeiro.Negocio.csproj", "{B1E1468A-130A-49D4-99EE-D1CCE153DFE1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OBarbeiro.Web", "OBarbeiro.WEB\OBarbeiro.Web.csproj", "{FC741FC8-B541-4552-B9EE-475C0C86DE46}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OBarbeiro.API", "OBarbeiro.API\OBarbeiro.API.csproj", "{59CBDEF4-5890-43F1-8712-B75810D04611}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OBarbeiro.Comum", "OBarbeiro.Comum\OBarbeiro.Comum.csproj", "{17F6349B-E0D9-4FB6-96F8-C912015FD6EF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0CA52684-BB86-4DC7-9C64-8489EA789415}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0CA52684-BB86-4DC7-9C64-8489EA789415}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0CA52684-BB86-4DC7-9C64-8489EA789415}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0CA52684-BB86-4DC7-9C64-8489EA789415}.Release|Any CPU.Build.0 = Release|Any CPU
+		{460CDB0D-07D2-478C-8B50-D947DCCB857B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{460CDB0D-07D2-478C-8B50-D947DCCB857B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{460CDB0D-07D2-478C-8B50-D947DCCB857B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{460CDB0D-07D2-478C-8B50-D947DCCB857B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1E1468A-130A-49D4-99EE-D1CCE153DFE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1E1468A-130A-49D4-99EE-D1CCE153DFE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1E1468A-130A-49D4-99EE-D1CCE153DFE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1E1468A-130A-49D4-99EE-D1CCE153DFE1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC741FC8-B541-4552-B9EE-475C0C86DE46}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC741FC8-B541-4552-B9EE-475C0C86DE46}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC741FC8-B541-4552-B9EE-475C0C86DE46}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC741FC8-B541-4552-B9EE-475C0C86DE46}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59CBDEF4-5890-43F1-8712-B75810D04611}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59CBDEF4-5890-43F1-8712-B75810D04611}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59CBDEF4-5890-43F1-8712-B75810D04611}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59CBDEF4-5890-43F1-8712-B75810D04611}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17F6349B-E0D9-4FB6-96F8-C912015FD6EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17F6349B-E0D9-4FB6-96F8-C912015FD6EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17F6349B-E0D9-4FB6-96F8-C912015FD6EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17F6349B-E0D9-4FB6-96F8-C912015FD6EF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {222391B8-B9F3-4484-86A4-47F9E64638BD}
+	EndGlobalSection
+EndGlobal

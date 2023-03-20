@@ -1,0 +1,63 @@
+﻿@using System.Security.Claims;
+@model IEnumerable<OBarbeiro.Modelo.Modelos.Usuario>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="row">
+    <div class="col-md-7">
+        <h3 style="text-align: center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                 class="bi bi-person-fill" viewBox="0 0 16 16">
+                <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+            </svg> Usuários
+        </h3>
+    </div>
+</div>
+
+<table class="table" id="minhaTabela">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PerfilUsuarioId)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DropDownListFor(modelItem => item.PerfilUsuarioId, new SelectList(ViewBag.PerfilsUsuario, "Value", "Text"), new {@class="form-control" })
+                </td>
+                <td>
+                    @Html.ActionLink("Alterar", "Edit", new {  Email=item.Email  }, new {@class = "btn btn-outline-warning m-1"}) |
+                    @if (User.Claims.Where(c => c.Type == ClaimTypes.Role).Select(c => c.Value).FirstOrDefault() == "admin")
+                    {
+                        @Html.ActionLink("Excluir", "Delete", new { Email=item.Email }, new {@class = "btn btn-outline-danger m-1"})
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#minhaTabela').DataTable({
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/f2c75b7247b/i18n/Portuguese-Brasil.json"
+                }
+            });
+        });
+    </script>
+}

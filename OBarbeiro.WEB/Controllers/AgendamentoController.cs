@@ -44,6 +44,23 @@ public class AgendamentoController : Controller
             throw new Exception("Não foi possível carregar as informações!");
     }
 
+    // GET: AgendamentoController
+    public async Task<IActionResult> IndexCliente(string email, string? mensagem = null, bool sucesso = true)
+    {
+        if (sucesso)
+            TempData["sucesso"] = mensagem;
+        else
+            TempData["erro"] = mensagem;
+
+        _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await _apiToken.Obter());
+        HttpResponseMessage response = await _httpClient.GetAsync($"{_dadosBase.Value.API_URL_BASE}Agendamento?email={email}");
+
+        if (response.IsSuccessStatusCode)
+            return View(JsonConvert.DeserializeObject<List<Agendamento>>(await response.Content.ReadAsStringAsync()));
+        else
+            throw new Exception("Não foi possível carregar as informações!");
+    }
+
     // GET: AgendamentoController/Details/5
     public ActionResult Details(int id)
     {
@@ -51,8 +68,10 @@ public class AgendamentoController : Controller
     }
 
     // GET: AgendamentoController/Create
-    public ActionResult Create()
+    public async Task<IActionResult> Agendar()
     {
+        ViewBag.AgendamentoStatus = await this.CarregarStatusAgendamento();
+        ViewBag.ProfissionaisLoja = await this.CarregarProfissionais();
         return View();
     }
 
@@ -163,5 +182,63 @@ public class AgendamentoController : Controller
             throw new Exception(response.ReasonPhrase);
         }
     }
+
+    private async Task<List<SelectListItem>> CarregarStatusAgendamento()
+    {
+        List<SelectListItem> lista = new();
+
+        _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await _apiToken.Obter());
+        HttpResponseMessage response = await _httpClient.GetAsync($"{_dadosBase.Value.API_URL_BASE}AgendamentoStatus");
+
+        if (response.IsSuccessStatusCode)
+        {
+            var status = JsonConvert.DeserializeObject<List<AgendamentoStatus>>(await response.Content.ReadAsStringAsync());
+
+            foreach (var linha in status)
+            {
+                lista.Add(new SelectListItem()
+                {
+                    Value = linha.AgendamentoStatusId.ToString(),
+                    Text = $"{linha.Descricao}",
+                    Selected = false,
+                });
+            }
+            return lista;
+        }
+        else
+        {
+            throw new Exception(response.ReasonPhrase);
+        }
+    }
+
+    private async Task<List<SelectListItem>> CarregarProfissionais()
+    {
+        List<SelectListItem> lista = new();
+
+        _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await _apiToken.Obter());
+        HttpResponseMessage response = await _httpClient.GetAsync($"{_dadosBase.Value.API_URL_BASE}Profissional");
+
+        if (response.IsSuccessStatusCode)
+        {
+            var profissionais = JsonConvert.DeserializeObject<List<Profissional>>(await response.Content.ReadAsStringAsync());
+
+            foreach (var linha in profissionais)
+            {
+                lista.Add(new SelectListItem()
+                {
+                    Value = linha.Cpf.ToString(),
+                    Text = $"{linha.Nome}",
+                    Selected = false,
+                });
+            }
+            return lista;
+        }
+        else
+        {
+            throw new Exception(response.ReasonPhrase);
+        }
+    }
     #endregion
+
+
 }

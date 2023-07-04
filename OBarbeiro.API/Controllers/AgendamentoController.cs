@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using OBarbeiro.Modelo.Modelos;
 using OBarbeiro.Negocio.Agendamento;
 
@@ -34,6 +33,17 @@ namespace OBarbeiro.API.Controllers
         public async Task<List<Agendamento>> ObterAgendamentosPorNome()
         {
             return await _agendamentoNegocio.ObterTodos();
+        }
+
+        /// <summary>
+        /// Método que obtem todos agendamentos do usuario logado!
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
+        [HttpGet("email")]
+        public async Task<List<Agendamento>> ObterAgendamentosPorEmailLogado([FromRoute] string email)
+        {
+            return await _agendamentoNegocio.ObterTodosPorEmail(email);
         }
 
         /// <summary>

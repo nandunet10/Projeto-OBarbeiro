@@ -5,16 +5,15 @@ namespace OBarbeiro.Negocio.NegocioBase
 {
     public class NegocioBase<T> : INegocioBase<T>, IDisposable where T : class
     {
-        protected OBarbeiroDbContext _Context;
+        protected readonly OBarbeiroDbContext _Context;
         public bool _SaveChanges = true;
-        public NegocioBase(bool saveChanges = true)
+        public NegocioBase(OBarbeiroDbContext context, bool saveChanges = true)
         {
-            _Context = new OBarbeiroDbContext();
+            _Context = context;
             _SaveChanges = saveChanges;
-            //_Context = context;
         }
-
         public async Task<T> Obter(params object[] valor) => _Context.Set<T>().Find(valor);
+        public async Task<List<T>> ObterTodosPorEmail(params object[] email) => _Context.Set<T>().Where(c => c.Equals(email)).ToList();
         public async Task<List<T>> ObterTodos() => _Context.Set<T>().ToList();
         public void SaveChages() => _Context.SaveChanges();
         public void Dispose() => _Context.Dispose();
@@ -43,6 +42,8 @@ namespace OBarbeiro.Negocio.NegocioBase
             if (_SaveChanges) { _Context.SaveChanges(); }
 
         }
+
+
 
     }
 }

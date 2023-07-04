@@ -19,7 +19,14 @@
     {await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     <script type="text/javascript">
         $(document).ready(function () {
-            $('.idCadastro').attr('readonly', true)
+            $('.idCadastro')
+            .val('nandunet.oliveira@gmail.com')            
+            .attr('readonly', true)
         });
+
+        $(document).ready(function(){
+            $('.idCadastroEdicao')
+            .attr('readonly', true)
+        })
     </script>
 }

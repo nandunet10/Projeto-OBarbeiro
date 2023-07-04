@@ -10,6 +10,7 @@
                     <select asp-for="PerfilUsuarioId" asp-items="ViewBag.PerfilsUsuario" class="form-control idCadastro"></select>
                     <span asp-validation-for="PerfilUsuarioId" class="text-danger"></span>
                 </div>
+           
             </div>
             <div class="col-3">
                 <div class="form-group">
@@ -70,7 +71,7 @@
     <div class="row actions justify-content-start">
         <div class="col-md-1">
             <div class="form-group">
-                <a asp-action="Index" class="btn btn-outline-info">Voltar</a>
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-outline-info">Voltar</a>
             </div>
         </div>
         <div class="col-md-1">

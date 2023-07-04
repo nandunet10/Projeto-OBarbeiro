@@ -30,10 +30,6 @@ namespace OBarbeiro.Infra.EntityConfigurations
             builder.Property(p => p.Cidade).HasColumnName("cidade").HasMaxLength(50);
             builder.Property(p => p.UF).HasColumnName("uf").HasMaxLength(2);
 
-            builder.HasMany(p => p.Produtos)
-                   .WithOne(p => p.Empresa)
-                   .HasForeignKey(p => p.EmpresaEmail).OnDelete(DeleteBehavior.ClientNoAction); 
-
             builder.HasMany(p => p.Servicos)
                    .WithOne(p => p.Empresa)
                    .HasForeignKey(p => p.EmpresaEmail).OnDelete(DeleteBehavior.ClientNoAction);

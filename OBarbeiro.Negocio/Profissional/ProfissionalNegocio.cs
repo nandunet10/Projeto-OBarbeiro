@@ -1,8 +1,9 @@
-﻿using OBarbeiro.Negocio.NegocioBase;
+﻿using OBarbeiro.Infra.Contexts;
+using OBarbeiro.Negocio.NegocioBase;
 
 namespace OBarbeiro.Negocio.Profissional;
 public class ProfissionalNegocio : NegocioBase<Modelo.Modelos.Profissional>, IProfissionalNegocio
 {
-    public ProfissionalNegocio(bool SaveChanges = true) : base(SaveChanges) { }
+    public ProfissionalNegocio(OBarbeiroDbContext context, bool SaveChanges = true) : base(context, SaveChanges) { }
 
 }

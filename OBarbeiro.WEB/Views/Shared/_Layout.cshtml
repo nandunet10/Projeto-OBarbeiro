@@ -33,18 +33,13 @@
                             <li class="menu nav-item text-end">
                                 <a class="nav-link text-white" asp-area="" asp-controller="Login" asp-action="Index">Entrar</a>
                             </li>
-             @*               <li class="menu nav-item text-end">
-                                <a class="nav-link text-white" asp-area="" asp-controller="Cadastro" asp-action="Create">Cadastre-se</a>
-                            </li>*@
+
                         }
 
-                        @if (User.Claims.Where(c => c.Type == ClaimTypes.Role).Select(c => c.Value).FirstOrDefault() == "usuario")
+                        @if (User.Claims.Where(c => c.Type == ClaimTypes.Role).Select(c => c.Value).FirstOrDefault() == "cliente")
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-white" asp-area="" asp-controller="Agendamento" asp-action="Index">Agendamentos</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-white" asp-area="" asp-controller="Produto" asp-action="Index">Produtos</a>
                             </li>
                         }
 
@@ -63,9 +58,6 @@
                                 <a class="nav-link text-white" asp-area="" asp-controller="Profissional" asp-action="Index">Profissional</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-white" asp-area="" asp-controller="Produto" asp-action="Index">Produtos</a>
-                            </li>
-                            <li class="nav-item">
                                 <a class="nav-link text-white" asp-area="" asp-controller="Servico" asp-action="Index">Serviços</a>
                             </li>
                         }
@@ -81,12 +73,6 @@
                             <li class="nav-item">
                                 <a class="nav-link text-white" asp-area="" asp-controller="Servico" asp-action="Index">Serviços</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-white" asp-area="" asp-controller="Produto" asp-action="Index">Produtos</a>
-                            </li>
-               @*             <li class="nav-item">
-                                <a class="nav-link text-white" asp-area="" asp-controller="AgendaProfissional" asp-action="Index">Agenda do profissional</a>
-                            </li>*@
                         }
                     </ul>
 

@@ -13,7 +13,6 @@ public partial class Empresa : EnderecoModel
     public string UsuarioEmail { get; set; }
     public Usuario? Usuario { get; set; }
 
-    public ICollection<Produto>? Produtos { get; set; }
     public ICollection<Servico>? Servicos { get; set; }
     public ICollection<Profissional>? Profissionais { get; set; }
 }

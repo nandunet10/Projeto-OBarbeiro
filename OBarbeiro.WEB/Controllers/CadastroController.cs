@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
@@ -29,40 +28,18 @@ public class CadastroController : Controller
         _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
     }
 
-    //// GET: CadastroController
-    //[Authorize(Roles = "admin")]
-    //public async Task<IActionResult> Index(string? mensagem = null, bool sucesso = true)
-    //{
-    //    if (sucesso)
-    //        TempData["sucesso"] = mensagem;
-    //    else
-    //        TempData["erro"] = mensagem;
-
-
-    //    _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await _apiToken.Obter());
-    //    HttpResponseMessage response = await _httpClient.GetAsync($"{_dadosBase.Value.API_URL_BASE}Cadastro");
-
-    //    if (response.IsSuccessStatusCode)
-    //    {
-    //        ViewBag.PerfilsUsuario = await CarregarPerfilUsuario(false);
-    //        return View(JsonConvert.DeserializeObject<List<Usuario>>(await response.Content.ReadAsStringAsync()));
-    //    }
-    //    else
-    //        throw new Exception("Não foi possível carregar as informações!");
-    //}
-
-    #region CadastroDeUsuario
-    // GET: CadastroController/CreateUsuario
-    public async Task<IActionResult> CreateUsuario()
+    #region CadastroDeCliente
+    // GET: CadastroController/CreateCliente
+    public async Task<IActionResult> CreateCliente()
     {
-        ViewBag.PerfilsUsuario = await CarregarPerfilUsuario(true, (int)PerfilsUsuarioEnum.Usuario);
+        ViewBag.PerfilsUsuario = await CarregarPerfilUsuario(true, (int)PerfilsUsuarioEnum.Cliente);
         return View();
     }
 
-    // POST: CadastroController/CreateUsuario
+    // POST: CadastroController/CreateCliente
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> CreateUsuario([FromForm] CadastroClienteViewModel model)
+    public async Task<IActionResult> CreateCliente([FromForm] CadastroClienteViewModel model)
     {
         try
         {
@@ -92,14 +69,14 @@ public class CadastroController : Controller
 
     #region CadastroDeEmpresa
 
-    // GET: CadastroController/CreateUsuario
+    // GET: CadastroController/CreateEmpresa
     public async Task<IActionResult> CreateEmpresa()
     {
         ViewBag.PerfilsUsuario = await CarregarPerfilUsuario(true, (int)PerfilsUsuarioEnum.Empresa);
         return View();
     }
 
-    // POST: CadastroController/CreateUsuario
+    // POST: CadastroController/CreateEmpresa
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> CreateEmpresa([FromForm] CadastroEmpresaViewModel model)

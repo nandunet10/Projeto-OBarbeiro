@@ -1,7 +1,8 @@
-﻿using OBarbeiro.Negocio.NegocioBase;
+﻿using OBarbeiro.Infra.Contexts;
+using OBarbeiro.Negocio.NegocioBase;
 
 namespace OBarbeiro.Negocio.Empresa;
 public class EmpresaNegocio : NegocioBase<Modelo.Modelos.Empresa>, IEmpresaNegocio
 {
-    public EmpresaNegocio(bool SaveChanges = true) : base(SaveChanges) { }
+    public EmpresaNegocio(OBarbeiroDbContext context, bool SaveChanges = true) : base(context, SaveChanges) { }
 }

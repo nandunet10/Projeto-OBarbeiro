@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Pesquisa\Pesquisa.cs~RF3d6a84d.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\OBarbeiro.Comum\OBarbeiro.Comum.csproj" />
     <ProjectReference Include="..\OBarbeiro.Infra\OBarbeiro.Infra.csproj" />
   </ItemGroup>

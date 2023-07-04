@@ -5,7 +5,6 @@ using OBarbeiro.Comum.Modelos;
 using OBarbeiro.Comum.Servico;
 using OBarbeiro.Modelo.Modelos;
 using System.Net.Http.Headers;
-using System.Reflection;
 
 namespace OBarbeiro.Web.Controllers;
 public class ServicoController : Controller
@@ -39,10 +38,7 @@ public class ServicoController : Controller
         HttpResponseMessage response = await _httpClient.GetAsync($"{_dadosBase.Value.API_URL_BASE}Servico");
 
         if (response.IsSuccessStatusCode)
-        {
-
             return View(JsonConvert.DeserializeObject<List<Servico>>(await response.Content.ReadAsStringAsync()));
-        }
         else
             throw new Exception("Não foi possível carregar as informações!");
     }

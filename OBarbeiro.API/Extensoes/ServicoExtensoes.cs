@@ -5,11 +5,12 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using OBarbeiro.Infra.Contexts;
 using OBarbeiro.Negocio.Agendamento;
+using OBarbeiro.Negocio.AgendamentoStatus;
 using OBarbeiro.Negocio.Cadastro;
 using OBarbeiro.Negocio.Cliente;
 using OBarbeiro.Negocio.Empresa;
 using OBarbeiro.Negocio.PerfilUsuario;
-using OBarbeiro.Negocio.Produto;
+using OBarbeiro.Negocio.Pesquisa;
 using OBarbeiro.Negocio.Profissional;
 using OBarbeiro.Negocio.Servico;
 using OBarbeiro.Negocio.Usuario;
@@ -110,14 +111,15 @@ public static class ServicoExtensoes
 
         //Adicionar Scoped
         services.AddScoped<IAgendamentoNegocio, AgendamentoNegocio>();
+        services.AddScoped<IAgendamentoStatusNegocio, AgendamentoStatusNegocio>();
         services.AddScoped<IClienteNegocio, ClienteNegocio>();
         services.AddScoped<IEmpresaNegocio, EmpresaNegocio>();
-        services.AddScoped<IProdutoNegocio, ProdutoNegocio>();
         services.AddScoped<ICadastroNegocio, CadastroNegocio>();
         services.AddScoped<IUsuarioNegocio, UsuarioNegocio>();
         services.AddScoped<IPerfilUsuariosNegocio, PerfilUsuariosNegocio>();
         services.AddScoped<IProfissionalNegocio, ProfissionalNegocio>();
         services.AddScoped<IServicoNegocio, ServicoNegocio>();
+        services.AddScoped<IPesquisa, Pesquisa>();
 
 
 

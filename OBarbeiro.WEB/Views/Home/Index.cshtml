@@ -19,7 +19,7 @@
                             <a asp-controller="Cadastro" asp-action="CreateEmpresa" class="btn btn-outline-info">TENHO UMA BARBEARIA - SOU BARBEIRO</a>
                         </label>
                         <label class="btn btn-type-customer" id="souCliente">
-                            <a asp-controller="Cadastro" asp-action="CreateUsuario" class="btn btn-outline-info">SOU CLIENTE</a>
+                            <a asp-controller="Cadastro" asp-action="CreateCliente" class="btn btn-outline-info">SOU CLIENTE</a>
                         </label>
                     </div>
                 </div>
@@ -30,16 +30,95 @@
             {
                 <h5>Seja Bem - vindo ao APP</h5>
             }
+            @if (User.Claims.Where(c => c.Type == ClaimTypes.Role).Select(c => c.Value).FirstOrDefault() == "cliente")
+            {
+                @model OBarbeiro.Comum.Modelos.PesquisarEmpresasViewModel
 
-            <p class="mt-5 text-black-50">Baixe o aplicativo nas Stores</p>
+                <br />
+                <form asp-controller="Pesquisa" asp-action="index">
+                    <div class="card">
+                        <div class="card-header justify-content-start">
+                            <small>Encontre barbearias perto</small>
+                        </div>
+                        <div class="card-body">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="row justify-content-between">
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label class="control-label"></label>
+                                        <input asp-for="NomeBarbearia" name="nomeBarbearia" id="nomeBarbearia" class="form-control" placeholder="Nome da barbearia" />
+                                        <span asp-validation-for="NomeBarbearia" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-10">
+                                    <div class="form-group">
+                                        <label class="control-label"></label>
+                                        <input asp-for="Cidade" name="Cidade" id="Cidade" class="form-control" placeholder="Cidade" />
+                                        <span asp-validation-for="Cidade" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="form-group">
+                                        <label class="control-label"></label>
+                                        <select asp-for="UF" name="UF" id="UF" class="form-control" placeholder="UF">
+                                            <option value="">UF</option>
+                                            <option value="AC">Acre</option>
+                                            <option value="AL">Alagoas</option>
+                                            <option value="AP">Amapá</option>
+                                            <option value="AM">Amazonas</option>
+                                            <option value="BA">Bahia</option>
+                                            <option value="CE">Ceará</option>
+                                            <option value="DF">Distrito Federal</option>
+                                            <option value="ES">Espírito Santo</option>
+                                            <option value="GO">Goiás</option>
+                                            <option value="MA">Maranhão</option>
+                                            <option value="MT">Mato Grosso</option>
+                                            <option value="MS">Mato Grosso do Sul</option>
+                                            <option value="MG">Minas Gerais</option>
+                                            <option value="PA">Pará</option>
+                                            <option value="PB">Paraíba</option>
+                                            <option value="PR">Paraná</option>
+                                            <option value="PE">Pernambuco</option>
+                                            <option value="PI">Piauí</option>
+                                            <option value="RJ">Rio de Janeiro</option>
+                                            <option value="RN">Rio Grande do Norte</option>
+                                            <option value="RS">Rio Grande do Sul</option>
+                                            <option value="RO">Rondônia</option>
+                                            <option value="RR">Roraima</option>
+                                            <option value="SC">Santa Catarina</option>
+                                            <option value="SP">São Paulo</option>
+                                            <option value="SE">Sergipe</option>
+                                            <option value="TO">Tocantins</option>
+                                            <option value="EX">Estrangeiro</option>
+                                        </select>
+                                        <span asp-validation-for="UF" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="row">
+                                <div class="col-sm-1">
+                                    <div class="form-group">
+                                        <input type="submit" value="Pesquisar" class="btn btn-outline-info Pesquisar" $event />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            }
+
+            @*<p class="mt-5 text-black-50">Baixe o aplicativo nas Stores</p>
             <div>
-                <a href="" target="_blank">
-                    <img src="data:image/webp;base64,UklGRs4FAABXRUJQVlA4TMIFAAAvlQAMEBfnoG0jQaq7z+P5w/ztPgcEbds2FXdncgNp24aW3shNRbKZ3TcykMWnGNC2bRtkl9mekeb7v9I2LWmf1mmXNgCgCWAnmP8BC0ClwwIgADqCLgKAgaACT0kAfN5JdHkMBOBchAW6gAYgAOiy0sO+AzMzAHNu4GdcqUvi3GGgEnTpABATMpVHyAjYwPgAllsaY/wuAAlg4NyBRMcs5w7sNRbm/sdgd+ABX/1KP/1Kllt6GBoAALVt2w5JTg3v0RrdawzWrEWcim3bTidr2/Zux05642Rt21tjz1x/pd6qHnbyMaL/E2BZVnJauhLI9LRky7KspFQlnKlJlpWqBDTVSlFCmpKWmKSlJybp+t/2iTXrAi8YlCBMJt7iAU3MtVuoa3ExzW8HbtTWjocbIhILgNNCEf98PxwtPyHXmclM291xwg5Hidq2e2KmeHiHHt4Rjrove2w35r4cOeG+3HoIG4ewHOzIjlhEkZiDjc3D2NGZ0Ug+YRw52C+7djif/FYjTD7OTCIOcsCRg4NwcKLLyQewDXKwd4DTssyfEvjfOJbHhKOHcciPxGIRRaI+D7NDsYgkP/fhcEuTq8Dzg7icWB6Wa59wX3Y4scO2o0TDtivXdm25EdlRYnJt2a5sN+LGXLt1COyg1raJ2G5i0gq3QG0yW4OBv/322+imdMdXV+Hi909mtXSTgDlNJ2sV5uK2Ld0h4Fxmk/kUypa+9uGqKxsl5b23peUaDlfhpqaS41IxQpLa95dUxOmWayq8AYuaylD4WgFbtGOcbVPC5SzPK19/3XbgssNFR5f2l5T79dcP5Lz95+VLPz7gNxZ+9dv8dQ3lX3/99TCp/bu/Xby2d3Y/z7yvZ2V/sP/aeOmGzefKz6wf1jxsWKRtcLtnPrxTibfsTikXlu3EuDHb1KmK+gd8ijDfopGnMVY8Kel39mwGbtFUjFUPNYuZcJPug+U+8Htk2nEoLfDAldkffwlMM2khsHG4Ycm6akrXrVs3qN91iL347FdQf6f0GzVwZse4t2Dnozd/XEpF/2aQcZqzGWpbjJsjaQrwsaT2MdiknsDu7pIegerepvbbAbY78hZxWpK+glmS9AmczNaPUPe81L2MXR0k3Q8LmsENMEfSarjL9Ie8/WqpbBcCRsn7ObxtUlakCOCzrgH61nO6jSdzP9ypr2GlpPfgHnlPcbIZzIEXR44c+S5sMH1k0G9wQwjOyfgQbPaROr9+BPgr2+9pmCvjZJjucSR9A5+86z0C7Zpc5nn8i9sanjUtg3tDsMc0BGIBpMyny+Elv4nwoulhWOUZImk3QUNN7iaC3hfX3UGGwo+BpJfgW7/p8LzpEVjuyZV0lNrf/LOa3CJ4Ndf7PmwzvGr6BUaH4JDpHlgTR0/Y6fcmTDd9ClP8/oZOalz4fF3gg0GyLlHRSd5u1ZS296w0hCsozQ5BVdiwCl6MYzD85DkjyYaDGZ6MXXCL33x4vNGMBx6fWIMxwO3whczfwaOeqhskZWyAFQoBazIk3VhDaXdD9rvtPdlfQES6QFVHKWMffOB5E45k+Y2H87lNwpZWxLUMHvN5Cr7wUD7jrid/hcL+BrY/fvfMcpgg4+246957duJ+uBSSfoIvXpio2+qoX3rzzUvr4U75aSMUzX7s/mcXH27X1HKuUtHJp2slFV2mwEmMxbfK45ZgXJtpmo7vpbGSHsTbUc/XYKx4RkE6fIvvLQ1UbDrw+MQa0wyfMXv2LJL/oj177pgCz71yAArX5MmwZ8iXFdT//Yh82zz7w3Vg37Qe8r5xEc6GpWGbi+DyigJJmrdnTx+PMh6LlUPpP5N7NdBcU8CqET4NOAWeldqHZfRImd1zFGenHpnyz+jeXuaundWgndqr4bM++Pm3wFvHq7H8TYngf7b0xCQ9rXmEcnM7BcnMze3T0qSlNI+WP8VKTURSLSspNfFITbIsy0pOS08k0tOSLcsC" alt="AppleStore" data-pagespeed-url-hash="847236608" onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
-                </a>
-                <a href="" target="_blank">
-                    <img src="data:image/webp;base64,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" alt="PlayStore" data-pagespeed-url-hash="3850207002" onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
-                </a>
-            </div>
+            <a href="" target="_blank">
+            <img src="data:image/webp;base64,UklGRs4FAABXRUJQVlA4TMIFAAAvlQAMEBfnoG0jQaq7z+P5w/ztPgcEbds2FXdncgNp24aW3shNRbKZ3TcykMWnGNC2bRtkl9mekeb7v9I2LWmf1mmXNgCgCWAnmP8BC0ClwwIgADqCLgKAgaACT0kAfN5JdHkMBOBchAW6gAYgAOiy0sO+AzMzAHNu4GdcqUvi3GGgEnTpABATMpVHyAjYwPgAllsaY/wuAAlg4NyBRMcs5w7sNRbm/sdgd+ABX/1KP/1Kllt6GBoAALVt2w5JTg3v0RrdawzWrEWcim3bTidr2/Zux05642Rt21tjz1x/pd6qHnbyMaL/E2BZVnJauhLI9LRky7KspFQlnKlJlpWqBDTVSlFCmpKWmKSlJybp+t/2iTXrAi8YlCBMJt7iAU3MtVuoa3ExzW8HbtTWjocbIhILgNNCEf98PxwtPyHXmclM291xwg5Hidq2e2KmeHiHHt4Rjrove2w35r4cOeG+3HoIG4ewHOzIjlhEkZiDjc3D2NGZ0Ug+YRw52C+7djif/FYjTD7OTCIOcsCRg4NwcKLLyQewDXKwd4DTssyfEvjfOJbHhKOHcciPxGIRRaI+D7NDsYgkP/fhcEuTq8Dzg7icWB6Wa59wX3Y4scO2o0TDtivXdm25EdlRYnJt2a5sN+LGXLt1COyg1raJ2G5i0gq3QG0yW4OBv/322+imdMdXV+Hi909mtXSTgDlNJ2sV5uK2Ld0h4Fxmk/kUypa+9uGqKxsl5b23peUaDlfhpqaS41IxQpLa95dUxOmWayq8AYuaylD4WgFbtGOcbVPC5SzPK19/3XbgssNFR5f2l5T79dcP5Lz95+VLPz7gNxZ+9dv8dQ3lX3/99TCp/bu/Xby2d3Y/z7yvZ2V/sP/aeOmGzefKz6wf1jxsWKRtcLtnPrxTibfsTikXlu3EuDHb1KmK+gd8ijDfopGnMVY8Kel39mwGbtFUjFUPNYuZcJPug+U+8Htk2nEoLfDAldkffwlMM2khsHG4Ycm6akrXrVs3qN91iL347FdQf6f0GzVwZse4t2Dnozd/XEpF/2aQcZqzGWpbjJsjaQrwsaT2MdiknsDu7pIegerepvbbAbY78hZxWpK+glmS9AmczNaPUPe81L2MXR0k3Q8LmsENMEfSarjL9Ie8/WqpbBcCRsn7ObxtUlakCOCzrgH61nO6jSdzP9ypr2GlpPfgHnlPcbIZzIEXR44c+S5sMH1k0G9wQwjOyfgQbPaROr9+BPgr2+9pmCvjZJjucSR9A5+86z0C7Zpc5nn8i9sanjUtg3tDsMc0BGIBpMyny+Elv4nwoulhWOUZImk3QUNN7iaC3hfX3UGGwo+BpJfgW7/p8LzpEVjuyZV0lNrf/LOa3CJ4Ndf7PmwzvGr6BUaH4JDpHlgTR0/Y6fcmTDd9ClP8/oZOalz4fF3gg0GyLlHRSd5u1ZS296w0hCsozQ5BVdiwCl6MYzD85DkjyYaDGZ6MXXCL33x4vNGMBx6fWIMxwO3whczfwaOeqhskZWyAFQoBazIk3VhDaXdD9rvtPdlfQES6QFVHKWMffOB5E45k+Y2H87lNwpZWxLUMHvN5Cr7wUD7jrid/hcL+BrY/fvfMcpgg4+246957duJ+uBSSfoIvXpio2+qoX3rzzUvr4U75aSMUzX7s/mcXH27X1HKuUtHJp2slFV2mwEmMxbfK45ZgXJtpmo7vpbGSHsTbUc/XYKx4RkE6fIvvLQ1UbDrw+MQa0wyfMXv2LJL/oj177pgCz71yAArX5MmwZ8iXFdT//Yh82zz7w3Vg37Qe8r5xEc6GpWGbi+DyigJJmrdnTx+PMh6LlUPpP5N7NdBcU8CqET4NOAWeldqHZfRImd1zFGenHpnyz+jeXuaundWgndqr4bM++Pm3wFvHq7H8TYngf7b0xCQ9rXmEcnM7BcnMze3T0qSlNI+WP8VKTURSLSspNfFITbIsy0pOS08k0tOSLcsC" alt="AppleStore" data-pagespeed-url-hash="847236608" onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
+            </a>
+            <a href="" target="_blank">
+            <img src="data:image/webp;base64,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" alt="PlayStore" data-pagespeed-url-hash="3850207002" onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
+            </a>
+            </div>*@
         </div>
     </header>
 

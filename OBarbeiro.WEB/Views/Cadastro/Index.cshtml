@@ -43,12 +43,33 @@
                     @if (User.Claims.Where(c => c.Type == ClaimTypes.Role).Select(c => c.Value).FirstOrDefault() == "admin")
                     {
                         @Html.ActionLink("Excluir", "Delete", new { Email=item.Email }, new {@class = "btn btn-outline-danger m-1"})
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-cpf="@item.Email" data-bs-nome="@item.Cliente.Nome">Excluir</a>
                     }
                 </td>
             </tr>
         }
     </tbody>
 </table>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Excluir cliente</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="divModalTexto" class="mb-3">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                @Html.ActionLink("Excluir","Delete", null, htmlAttributes: new {@class = "btn btn-primary"})
+
+            </div>
+        </div>
+    </div>
+</div>
 
 @section Scripts{
     <script type="text/javascript">

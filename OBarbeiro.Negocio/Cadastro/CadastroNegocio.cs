@@ -41,6 +41,8 @@ public class CadastroNegocio : ICadastroNegocio
             Ativo = true,
         };
 
+        VerificarSeECadastradado(usuario.Email, usuario.PerfilUsuarioId);
+
         await _context.Empresas.AddAsync(empresa);
         await _context.Usuarios.AddAsync(usuario);
         await _context.SaveChangesAsync();
@@ -48,30 +50,51 @@ public class CadastroNegocio : ICadastroNegocio
 
     public async Task IncluirCliente(CadastroClienteViewModel objeto)
     {
-
-        var usuario = new Modelo.Modelos.Usuario()
+        try
         {
-            Email = objeto.Email,
-            Senha = objeto.Senha,
-            PerfilUsuarioId = (int)PerfilsUsuarioEnum.Usuario
-        };
+            var usuario = new Modelo.Modelos.Usuario()
+            {
+                Email = objeto.Email,
+                Senha = objeto.Senha,
+                PerfilUsuarioId = (int)PerfilsUsuarioEnum.Cliente
+            };
 
-        var cliente = new Modelo.Modelos.Cliente
+            var cliente = new Modelo.Modelos.Cliente
+            {
+                UsuarioEmail = objeto.Email,
+
+                Email = objeto.Email,
+                Nome = objeto.Nome,
+                Celular = objeto.Celular,
+                DataNascimento = objeto.DataNascimento,
+                DataInclusao = DateTime.Now,
+                Ativo = true,
+            };
+
+            VerificarSeECadastradado(usuario.Email, usuario.PerfilUsuarioId);
+
+            await _context.Clientes.AddAsync(cliente);
+            await _context.Usuarios.AddAsync(usuario);
+
+            await _context.SaveChangesAsync();
+
+
+        }
+        catch (Exception ex)
         {
-            UsuarioEmail = objeto.Email,
-
-            Email = objeto.Email,
-            Nome = objeto.Nome,
-            Celular = objeto.Celular,
-            DataNascimento = objeto.DataNascimento,
-            DataInclusao = DateTime.Now,
-            Ativo = true,
-        };
-
-        await _context.Clientes.AddAsync(cliente);
-        await _context.Usuarios.AddAsync(usuario);
-        await _context.SaveChangesAsync();
+            throw new Exception(ex.Message);
+        }
 
 
+    }
+
+    public bool VerificarSeECadastradado(string email, int perfilUsuarioId)
+    {
+        var response = _context.Usuarios.Where(c => c.Email.Equals(email) && c.PerfilUsuarioId.Equals(perfilUsuarioId));
+
+        if (response.Count() > 0)
+            throw new Exception("Usuário já possui cadastro!");
+
+        return false;
     }
 }

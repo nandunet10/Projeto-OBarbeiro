@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace OBarbeiro.Modelo.Modelos;
+﻿namespace OBarbeiro.Modelo.Modelos;
 public class PerfilUsuario
 {
     public int PerfilUsuarioId { get; set; }

@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-
-namespace OBarbeiro.Negocio.NegocioBase;
+﻿namespace OBarbeiro.Negocio.NegocioBase;
 public interface INegocioBase<T> where T : class
 {
     Task<List<T>> ObterTodos();

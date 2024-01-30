@@ -5,8 +5,6 @@ using OBarbeiro.Modelo.Modelos;
 namespace OBarbeiro.Infra.Contexts;
 public partial class OBarbeiroDbContext : DbContext
 {
-
-    //public OBarbeiroDbContext() { }
     public OBarbeiroDbContext(DbContextOptions<OBarbeiroDbContext> options) : base(options) { }
 
     public DbSet<Usuario> Usuarios { get; set; }
@@ -43,6 +41,5 @@ public partial class OBarbeiroDbContext : DbContext
         modelBuilder.ApplyConfiguration(new ProfissionalEntityTypeConfiguration());
         modelBuilder.ApplyConfiguration(new ServicoEntityTypeConfiguration());
         modelBuilder.ApplyConfiguration(new UsuarioEntityTypeConfiguration());
-
     }
 }

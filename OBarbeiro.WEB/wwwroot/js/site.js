@@ -7,4 +7,11 @@
 
     $('.maskValor').inputmask({ mask: ['"{0:N}", 43239, 11'] });
 
+    $('#minhaTabela').DataTable({
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/f2c75b7247b/i18n/Portuguese-Brasil.json"
+        }
+    });
+
 })
+

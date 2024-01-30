@@ -6,105 +6,102 @@
 }
 
 <div>
-    <div class="col-md-12">
-        <h3 style="text-align: center">
+    <div class="col-12">
+        <h3>
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                  class="bi bi-person-fill" viewBox="0 0 16 16">
                 <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
-            </svg> Detalhes
+            </svg> @Html.DisplayFor(model => model.NomeBarbearia)
         </h3>
     </div>
 </div>
 
 <div>
-    <h4>Empresas</h4>
-    <hr />
     <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Nome)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Nome)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.NomeBarbearia)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.NomeBarbearia)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Telefone)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Telefone)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Celular)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Celular)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.DataInclusao)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.DataInclusao)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.DataAlteracao)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.DataAlteracao)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Ativo)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Ativo)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Logradouro)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Logradouro)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Numero)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Numero)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Complemento)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Complemento)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Cidade)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Cidade)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.UF)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.UF)
-        </dd>
+        <div class="card col-5">
+            <div class="card-body">
+                <img src="~/img/barbeariaFoto.jpg" width="500px" height="960px" margin="auto" />
+            </div>
+        </div>
+        <div class="card col-7">
+            <div class="card-header">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 16 16">
+                    <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z" />
+                    <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                </svg> Localização
+            </div>
+            <div class="card-body">
+                <dt class="col-sm-2">
+                    @Html.DisplayName("")
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Logradouro), @Html.DisplayFor(model => model.Numero)
+                    - @Html.DisplayFor(model => model.Cep) - @Html.DisplayFor(model => model.Cidade)/@Html.DisplayFor(model => model.UF)
+                </dd>
+            </div>
+
+            <br />
+            <div class="card-header">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-hourglass-split" viewBox="0 0 16 16">
+                    <path d="M2.5 15a.5.5 0 1 1 0-1h1v-1a4.5 4.5 0 0 1 2.557-4.06c.29-.139.443-.377.443-.59v-.7c0-.213-.154-.451-.443-.59A4.5 4.5 0 0 1 3.5 3V2h-1a.5.5 0 0 1 0-1h11a.5.5 0 0 1 0 1h-1v1a4.5 4.5 0 0 1-2.557 4.06c-.29.139-.443.377-.443.59v.7c0 .213.154.451.443.59A4.5 4.5 0 0 1 12.5 13v1h1a.5.5 0 0 1 0 1h-11zm2-13v1c0 .537.12 1.045.337 1.5h6.326c.216-.455.337-.963.337-1.5V2h-7zm3 6.35c0 .701-.478 1.236-1.011 1.492A3.5 3.5 0 0 0 4.5 13s.866-1.299 3-1.48V8.35zm1 0v3.17c2.134.181 3 1.48 3 1.48a3.5 3.5 0 0 0-1.989-3.158C8.978 9.586 8.5 9.052 8.5 8.351z" />
+                </svg> Horário de atendimento
+            </div>
+            <div class="card-body">
+                <dt class="col-sm-2">
+                    @Html.DisplayName("")
+                </dt>
+                <dd class="col-sm-10 justify-content-end">
+                    <dl>
+                        <dt>@Html.DisplayName("Segunda-feira")</dt>
+                        <dd>09h00 - 20h00</dd>
+                        <dt>@Html.DisplayName("Terça-feira")</dt>
+                        <dd>09h00 - 20h00</dd>
+                        <dt>@Html.DisplayName("Quearta-feira")</dt>
+                        <dd>09h00 - 20h00</dd>
+                        <dt>@Html.DisplayName("Quinta-feira")</dt>
+                        <dd>09h00 - 20h00</dd>
+                        <dt>@Html.DisplayName("Sexta-feira")</dt>
+                        <dd>09h00 - 20h00</dd>
+                        <dt>@Html.DisplayName("Sábado")</dt>
+                        <dd>09h00 - 20h00</dd>
+                        <dt>@Html.DisplayName("Domingo")</dt>
+                        <dd>08h00 - 16h00</dd>
+                    </dl>
+                </dd>
+            </div>
+
+            <br />
+            <div class="card-header">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-lines-fill" viewBox="0 0 16 16">
+                    <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5 6s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zM11 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4zm2 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2zm0 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2z" />
+                </svg> Informações para contato
+            </div>
+            <div class="card-body">
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Email)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Email)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Telefone)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Telefone)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Celular)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Celular)
+                </dd>
+                </dd>
+            </div>
+            <div class="card-footer justify-content-xl-end">
+                <a asp-controller="Pesquisa" asp-action="Index" class="btn btn-outline-info">Voltar para lista</a>
+                @Html.ActionLink("Agendar","PesquisarAgenda", "Agendamento", new { email=Model.Email  }, new {@class = "btn btn-outline-primary m-1"})
+            </div>
+        </div>
     </dl>
 </div>
-<div>
-    @*@Html.ActionLink("Alterar", "Edit", new {  email=Model.Email  }, new {@class = "btn btn-outline-warning m-1"}) |*@
-    @if (User.Claims.Where(c => c.Type == ClaimTypes.Role).Select(c => c.Value).FirstOrDefault() == "admin")
-    {
-        <a asp-controller="Cadastro" asp-action="EditEmpresa" asp-route-id="@Model?.Email" class="btn btn-outline-warning m-1">Alterar</a>
-    }
-    <a asp-action="Index" class="btn btn-outline-info">Voltar para lista</a>
-</div>
+

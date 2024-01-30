@@ -25,25 +25,16 @@ namespace OBarbeiro.API.Controllers
             return await _agendamentoNegocio.ObterTodos();
         }
 
-        /// <summary>
-        /// Método para obter todos agendamentos
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet("PorNome")]
-        public async Task<List<Agendamento>> ObterAgendamentosPorNome()
-        {
-            return await _agendamentoNegocio.ObterTodos();
-        }
 
         /// <summary>
         /// Método que obtem todos agendamentos do usuario logado!
         /// </summary>
         /// <param name="email"></param>
         /// <returns></returns>
-        [HttpGet("email")]
+        [HttpGet("{email}")]
         public async Task<List<Agendamento>> ObterAgendamentosPorEmailLogado([FromRoute] string email)
         {
-            return await _agendamentoNegocio.ObterTodosPorEmail(email);
+            return await _agendamentoNegocio.ObterTodosPorParametro(p => p.ClienteEmail.Equals(email));
         }
 
         /// <summary>

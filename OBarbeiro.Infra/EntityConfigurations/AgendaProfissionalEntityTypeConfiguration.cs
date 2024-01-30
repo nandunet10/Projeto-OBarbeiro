@@ -13,7 +13,7 @@ namespace OBarbeiro.Infra.EntityConfigurations
             builder.HasKey(p => p.AgendaProfissionalId);
 
             builder.Property(p => p.AgendaProfissionalId).HasColumnName("agendaProfissionalId").ValueGeneratedOnAdd();
-            builder.Property(p => p.DiaSemana).HasColumnName("diaSemana").HasColumnType("DATE");
+            builder.Property(p => p.DiaSemana).HasColumnName("diaSemana");
             builder.Property(p => p.HoraInicioAlmoco).HasColumnName("horaInicioAlmoco");
             builder.Property(p => p.HoraFimAlmoco).HasColumnName("horaFimAlmoco");
             builder.Property(p => p.HoraInicioExpediente).HasColumnName("horaInicioExpediente");

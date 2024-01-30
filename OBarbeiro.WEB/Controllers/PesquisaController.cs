@@ -29,7 +29,7 @@ namespace OBarbeiro.Web.Controllers
                 HttpResponseMessage response = await _httpClient.PostAsJsonAsync($"{_dadosBase.Value.API_URL_BASE}Pesquisa", pesquisar);
 
                 if (response.IsSuccessStatusCode)
-                    return View(JsonConvert.DeserializeObject<List<PesquisaViewModel>>(await response.Content.ReadAsStringAsync()));
+                    return View(JsonConvert.DeserializeObject<List<RetornoPesquisaEmpresasViewModel>>(await response.Content.ReadAsStringAsync()));
                 else
                     throw new Exception("Não foi possível carregar as informações!");
             }

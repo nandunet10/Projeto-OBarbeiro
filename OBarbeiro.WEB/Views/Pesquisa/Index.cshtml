@@ -1,4 +1,4 @@
-﻿@model IEnumerable<OBarbeiro.Comum.Modelos.PesquisaViewModel>
+﻿@model IEnumerable<OBarbeiro.Comum.Modelos.RetornoPesquisaEmpresasViewModel>
 
 @{
     ViewData["Title"] = "Index";
@@ -24,7 +24,7 @@
                 @Html.DisplayNameFor(model => model.Email)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.NomeBarbearia)
+                @Html.DisplayName("Nome da barbearia")
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Celular)
@@ -51,16 +51,24 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Telefone)
                 </td>
+
                 <td class="row-cols-md-12">
-                    <form asp-controller="Agendamento" asp-action="Agendar">
-                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                        <input type="submit" value="Agendar" class="btn btn-outline-primary Agendar" $event />
-                    </form>
+                    @Html.ActionLink("Visualizar","Details", "Empresa", new { email=item.Email  }, new {@class = "btn btn-outline-primary m-1"})
                 </td>
             </tr>
         }
     </tbody>
 </table>
+
+
+<h1>Lista de Itens</h1>
+<ul>
+    @foreach (var items in Model)
+    {
+
+    }
+</ul>
+
 
 <div class="row actions justify-content-start">
     <div class="col-md-4 m-0">
@@ -69,15 +77,3 @@
         </div>
     </div>
 </div>
-
-@section Scripts{
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#minhaTabela').DataTable({
-                "language": {
-                    "url": "//cdn.datatables.net/plug-ins/f2c75b7247b/i18n/Portuguese-Brasil.json"
-                }
-            });
-        });
-    </script>
-}

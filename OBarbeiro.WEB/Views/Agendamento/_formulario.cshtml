@@ -1,58 +1,45 @@
-﻿@model OBarbeiro.Modelo.Modelos.Agendamento
+﻿@using System.Security.Claims;
+@model OBarbeiro.Comum.Modelos.PesquisarAgendamentoViewModel
 
 <div class="card">
     <div class="card-header">Agendamento</div>
     <div class="card-body">
-        <div class="row">
-            <div class="col-3">
-                <div class="form-group">
-                    <label asp-for="AgendamentoStatusId" class="control-label">Status</label>
-                    <select asp-for="AgendamentoStatusId" asp-items="ViewBag.AgendamentoStatus" class="form-control idCadastro" disabled></select>
-                    <span asp-validation-for="AgendamentoStatusId" class="text-danger"></span>
+        <div class="container">
+            <div class="row">
+                <div class="col-3">
+                    <div class="form-group">
+                        <label asp-for="DataAgendamento" class="control-label">Data Agendamento</label>
+                        <input asp-for="DataAgendamento" name="dataAgendamento" id="dataAgendamento" class="form-control" />
+                        <span asp-validation-for="DataAgendamento" class="text-danger"></span>
+                    </div>
                 </div>
 
-            </div>
-            <div class="col-9">
-                <div class="form-group">
-                    <label asp-for="DataAgendamento" class="control-label">Data Agendamento</label>
-                    <input asp-for="DataAgendamento" name="dataAgendamento" id="dataAgendamento" class="form-control" placeholder="Data do agendamento" />
-                    <span asp-validation-for="DataAgendamento" class="text-danger"></span>
+                <div class="col-3">
+                    <div class="form-group">
+                        <label asp-for="ServidoId" class="control-label">Serviços</label>
+                        <select asp-for="ServidoId" asp-items="ViewBag.ServicoEmpresa" class="form-control"></select>
+                        <span asp-validation-for="ServidoId" class="text-danger"></span>
+                    </div>
                 </div>
-            </div>
-        </div>
 
-        <br />
-        <div class="row">
-            <div class="col-4">
-                <div class="form-group">
-                    <label asp-for="ClienteEmail" class="control-label">E-mail login</label>
-                    <input asp-for="ClienteEmail" class="form-control" />
-                    <span asp-validation-for="ClienteEmail" class="text-danger"></span>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label asp-for="ProfissionalCpf" class="control-label">Profissionais</label>
+                        <select asp-for="ProfissionalCpf" asp-items="ViewBag.ProfissionaisEmpresa" class="form-control"></select>
+                        @*<span asp-validation-for="ProfissionalCpf" class="text-danger"></span>*@
+                    </div>
                 </div>
-            </div>
-            <div class="col-4">
-                <div class="form-group">
-                    <label asp-for="ProfissionalCpf" class="control-label"></label>
-                    <select asp-for="ProfissionalCpf" asp-items="ViewBag.ProfissionaisLoja"  class="form-control"></select>
-                    <span asp-validation-for="ProfissionalCpf" class="text-danger"></span>
-                </div>
-            </div>
-        </div>
 
-    </div>
-    <div class="card-footer">
-        <div class="row actions justify-content-start">
-            <div class="col-md-1">
-                <div class="form-group">
-                    <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-outline-info">Voltar</a>
-                </div>
-            </div>
-            <div class="col-md-1">
-                <div class="form-group">
-                    <input type="submit" value="Salvar" class="btn btn-outline-success salvar" $event />
+
+                <div class="col-2 mt-4">
+                    <div class="form-group">
+                        <input type="submit" value="Buscar horário" class="btn btn-outline-success salvar" idPesquisa />
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<hr />
+
 

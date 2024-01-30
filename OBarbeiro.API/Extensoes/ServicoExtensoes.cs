@@ -6,9 +6,11 @@ using Microsoft.OpenApi.Models;
 using OBarbeiro.Infra.Contexts;
 using OBarbeiro.Negocio.Agendamento;
 using OBarbeiro.Negocio.AgendamentoStatus;
+using OBarbeiro.Negocio.AgendaProfissional;
 using OBarbeiro.Negocio.Cadastro;
 using OBarbeiro.Negocio.Cliente;
 using OBarbeiro.Negocio.Empresa;
+using OBarbeiro.Negocio.NegocioBase;
 using OBarbeiro.Negocio.PerfilUsuario;
 using OBarbeiro.Negocio.Pesquisa;
 using OBarbeiro.Negocio.Profissional;
@@ -110,16 +112,19 @@ public static class ServicoExtensoes
         services.AddDbContext<OBarbeiroDbContext>(opt => opt.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
         //Adicionar Scoped
-        services.AddScoped<IAgendamentoNegocio, AgendamentoNegocio>();
-        services.AddScoped<IAgendamentoStatusNegocio, AgendamentoStatusNegocio>();
-        services.AddScoped<IClienteNegocio, ClienteNegocio>();
-        services.AddScoped<IEmpresaNegocio, EmpresaNegocio>();
-        services.AddScoped<ICadastroNegocio, CadastroNegocio>();
-        services.AddScoped<IUsuarioNegocio, UsuarioNegocio>();
-        services.AddScoped<IPerfilUsuariosNegocio, PerfilUsuariosNegocio>();
-        services.AddScoped<IProfissionalNegocio, ProfissionalNegocio>();
-        services.AddScoped<IServicoNegocio, ServicoNegocio>();
-        services.AddScoped<IPesquisa, Pesquisa>();
+        //services.AddScoped<IAgendamentoNegocio, AgendamentoNegocio>();
+        //services.AddScoped<IAgendamentoStatusNegocio, AgendamentoStatusNegocio>();
+        //services.AddScoped<IAgendaProfissionalNegocio, AgendaProfissionalNegocio>();
+        //services.AddScoped<IClienteNegocio, ClienteNegocio>();
+        //services.AddScoped<IEmpresaNegocio, EmpresaNegocio>();
+        //services.AddScoped<ICadastroNegocio, CadastroNegocio>();
+        //services.AddScoped<IUsuarioNegocio, UsuarioNegocio>();
+        //services.AddScoped<IPerfilUsuariosNegocio, PerfilUsuariosNegocio>();
+        //services.AddScoped<IProfissionalNegocio, ProfissionalNegocio>();
+        //services.AddScoped<IServicoNegocio, ServicoNegocio>();
+        //services.AddScoped<IPesquisa, Pesquisa>();
+
+        services.AddScoped(typeof(INegocioBase<>), typeof(NegocioBase<>));
 
 
 

@@ -5,6 +5,8 @@ using Newtonsoft.Json;
 using OBarbeiro.Comum.Modelos;
 using OBarbeiro.Comum.Servico;
 using OBarbeiro.Modelo.Modelos;
+using System;
+using System.Data;
 using System.Net.Http.Headers;
 
 namespace OBarbeiro.Front.Controllers;
@@ -67,25 +69,43 @@ public class AgendamentoController : Controller
         return View();
     }
 
-    // GET: AgendamentoController/Create
-    public async Task<IActionResult> Agendar()
+    // GET: AgendamentoController/PesquisarAgenda
+    public async Task<IActionResult> PesquisarAgenda([FromForm] string email)
     {
-        ViewBag.AgendamentoStatus = await this.CarregarStatusAgendamento();
-        ViewBag.ProfissionaisLoja = await this.CarregarProfissionais();
-        return View();
+        ViewBag.ProfissionaisEmpresa = await this.CarregarProfissionaisPorEmpresa(email);
+        ViewBag.ServicoEmpresa = await this.CarregarServicosPorEmpresa(email);
+        ViewData["Email"] = email;
+        return View(email);
     }
 
-    // POST: AgendamentoController/Create
+    // POST: AgendamentoController/PesquisarAgenda
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public ActionResult Create(IFormCollection collection)
+    public async Task<IActionResult> PesquisarAgenda([FromForm] PesquisarAgendamentoViewModel model)
     {
         try
         {
-            return RedirectToAction(nameof(Index));
+            model.Email = "nandunet.oliveira@gmail.com";
+            if (ModelState.IsValid)
+            {
+                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await _apiToken.Obter());
+                HttpResponseMessage response = await _httpClient.PostAsJsonAsync($"{_dadosBase.Value.API_URL_BASE}Pesquisa/horario", model);
+
+                if (response.IsSuccessStatusCode)
+                    return RedirectToAction("Index", "Home", new { mensagem = "Registro criado!", sucesso = true });
+                else
+                    throw new Exception($"Não foi possível encontrar o serviço!");
+
+            }
+            else
+            {
+                TempData["erro"] = "Algum campo deve estar faltando o seu preenchimento!";
+                return View();
+            }
         }
-        catch
+        catch (Exception ex)
         {
+            TempData["erro"] = "Algum erro aconteceu " + ex.Message;
             return View();
         }
     }
@@ -193,16 +213,13 @@ public class AgendamentoController : Controller
         if (response.IsSuccessStatusCode)
         {
             var status = JsonConvert.DeserializeObject<List<AgendamentoStatus>>(await response.Content.ReadAsStringAsync());
-
-            foreach (var linha in status)
-            {
-                lista.Add(new SelectListItem()
-                {
-                    Value = linha.AgendamentoStatusId.ToString(),
-                    Text = $"{linha.Descricao}",
-                    Selected = false,
-                });
-            }
+            lista.AddRange(from linha in status
+                           select new SelectListItem()
+                           {
+                               Value = linha.AgendamentoStatusId.ToString(),
+                               Text = $"{linha.Descricao}",
+                               Selected = false,
+                           });
             return lista;
         }
         else
@@ -211,26 +228,61 @@ public class AgendamentoController : Controller
         }
     }
 
-    private async Task<List<SelectListItem>> CarregarProfissionais()
+
+    private async Task<List<AgendaProfissional>> CarregarAgendaProfissional(string cpf)
+    {
+        _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await _apiToken.Obter());
+        HttpResponseMessage response = await _httpClient.GetAsync($"{_dadosBase.Value.API_URL_BASE}AgendaProfissional?cpf={cpf}");
+
+        if (response.IsSuccessStatusCode)
+            return JsonConvert.DeserializeObject<List<AgendaProfissional>>(await response.Content.ReadAsStringAsync());
+        else
+            throw new Exception("Algo não deu certo.");
+    }
+    private async Task<List<SelectListItem>> CarregarProfissionaisPorEmpresa(string email)
     {
         List<SelectListItem> lista = new();
 
         _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await _apiToken.Obter());
-        HttpResponseMessage response = await _httpClient.GetAsync($"{_dadosBase.Value.API_URL_BASE}Profissional");
+        HttpResponseMessage response = await _httpClient.GetAsync($"{_dadosBase.Value.API_URL_BASE}Profissional?email={email}");
 
         if (response.IsSuccessStatusCode)
         {
             var profissionais = JsonConvert.DeserializeObject<List<Profissional>>(await response.Content.ReadAsStringAsync());
+            lista.Add(new() { Value = null, Text = "Sem preferência" });
+            lista.AddRange(from linha in profissionais
+                           select new SelectListItem()
+                           {
+                               Value = linha.Cpf.ToString(),
+                               Text = $"{linha.Nome}",
+                               Selected = false,
+                           });
 
-            foreach (var linha in profissionais)
-            {
-                lista.Add(new SelectListItem()
-                {
-                    Value = linha.Cpf.ToString(),
-                    Text = $"{linha.Nome}",
-                    Selected = false,
-                });
-            }
+            return lista;
+        }
+        else
+        {
+            throw new Exception(response.ReasonPhrase);
+        }
+    }
+    private async Task<List<SelectListItem>> CarregarServicosPorEmpresa(string email)
+    {
+        List<SelectListItem> lista = new();
+
+        _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await _apiToken.Obter());
+        HttpResponseMessage response = await _httpClient.GetAsync($"{_dadosBase.Value.API_URL_BASE}Servico?email={email}");
+
+        if (response.IsSuccessStatusCode)
+        {
+            var servicos = JsonConvert.DeserializeObject<List<Servico>>(await response.Content.ReadAsStringAsync());
+            lista.Add(new() { Value = null, Text = "Serviços" });
+            lista.AddRange(from Servico linha in servicos
+                           select new SelectListItem()
+                           {
+                               Value = linha.ServicoId.ToString(),
+                               Text = $"{linha.Descricao}",
+                               Selected = false,
+                           });
             return lista;
         }
         else

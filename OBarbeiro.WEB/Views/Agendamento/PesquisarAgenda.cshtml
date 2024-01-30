@@ -1,0 +1,22 @@
+﻿@model OBarbeiro.Modelo.Modelos.Agendamento
+
+@{
+    ViewData["Title"] = "Pesquisar - agenda";
+}
+
+<h4 class="text-lg-start text-success">Agenda Já!</h4>
+<hr class="bg-white" />
+
+<div class="col-md-12 justify-content-evenly">
+    <form asp-action="PesquisarAgenda">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <partial name="_Formulario" />
+    </form>
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.idCadastro').attr('disabled', true)
+    });
+</script>

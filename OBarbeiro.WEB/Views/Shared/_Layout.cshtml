@@ -7,7 +7,9 @@
     <title>@ViewData["Title"] - OBarbeiro</title>
     <link rel="stylesheet" href="~/OBarbeiro.WEB.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="~/lib/datatables.net-bs5/datatables.bootstrap5.min.css" rel="stylesheet" />
+    <link href="~/lib/toastr.js/toastr.min.css" rel="stylesheet" />
+    @*<link href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css" rel="stylesheet" />*@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 
 </head>
@@ -81,14 +83,14 @@
         </nav>
     </header>
 
-    <div class="alert alert-success alert-dismissible fade show" id="alertaSucesso">
+  @*  <div class="alert alert-success alert-dismissible fade show" id="alertaSucesso">
         <strong>Successo!</strong> @TempData["sucesso"]
         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
     </div>
     <div class="alert alert-danger alert-dismissible fade show" id="alertaErro">
         <strong>Erro!</strong> @TempData["erro"]
         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-    </div>
+    </div>*@
 
 
     <div class="container">
@@ -99,27 +101,33 @@
 
     <footer class="border-top footer text-white" style="background-color: darkblue;">
         <div class="container">
-            &copy; 2022 - OBarbeiro - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; @DateTime.Now.Year - OBarbeiro
         </div>
     </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/datatables.net/jquery.datatables.min.js"></script>
+    <script src="~/lib/datatables.net-bs5/datatables.bootstrap5.min.js"></script>
+    <script src="~/lib/toastr.js/toastr.min.js"></script>
     <script src="~/lib/inputmask/jquery.inputmask.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+    @*<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>*@
     @await RenderSectionAsync("Scripts", required: false)
 
     <script type="text/javascript">
         $(function () {
-            document.getElementById('alertaErro').style.display = 'none';
-            document.getElementById('alertaSucesso').style.display = 'none';
+            //document.getElementById('alertaErro').style.display = 'none';
+            //document.getElementById('alertaSucesso').style.display = 'none';
 
             if ("@TempData["sucesso"]") {
-                document.getElementById('alertaSucesso').style.display = 'block';
+                //document.getElementById('alertaSucesso').style.display = 'block';
+                toastr.success("@TempData["sucesso"]")
             }
             else if ("@TempData["erro"]") {
-                document.getElementById('alertaErro').style.display = 'block';
+                //document.getElementById('alertaErro').style.display = 'block';
+                toastr.error("@TempData["erro"]")
+
             };
         });
     </script>

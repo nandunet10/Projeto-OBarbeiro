@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OBarbeiro.Infra.Contexts;
+using System.Linq.Expressions;
 
 namespace OBarbeiro.Negocio.NegocioBase
 {
@@ -13,8 +14,8 @@ namespace OBarbeiro.Negocio.NegocioBase
             _SaveChanges = saveChanges;
         }
         public async Task<T> Obter(params object[] valor) => _Context.Set<T>().Find(valor);
-        public async Task<List<T>> ObterTodosPorEmail(params object[] email) => _Context.Set<T>().Where(c => c.Equals(email)).ToList();
-        public async Task<List<T>> ObterTodos() => _Context.Set<T>().ToList();
+        public async Task<List<T>> ObterTodosPorParametro(Expression<Func<T, bool>> expression) => await _Context.Set<T>().Where(expression).ToListAsync();
+        public async Task<List<T>> ObterTodos() => await _Context.Set<T>().ToListAsync();
         public void SaveChages() => _Context.SaveChanges();
         public void Dispose() => _Context.Dispose();
 

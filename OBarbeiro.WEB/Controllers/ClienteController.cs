@@ -57,27 +57,30 @@ public class ClienteController : Controller
     {
         try
         {
-            if (model != null)
+            //if (model != null)
+            //{
+            //    model.DataInclusao = DateTime.Now;
+            //    model.Ativo = true;
+            //}
+
+            if (ModelState.IsValid)
             {
                 model.DataInclusao = DateTime.Now;
                 model.Ativo = true;
+
+                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await _apiToken.Obter());
+                HttpResponseMessage response = await _httpClient.PostAsJsonAsync($"{_dadosBase.Value.API_URL_BASE}Cliente", model);
+
+                if (response.IsSuccessStatusCode)
+                    return RedirectToAction(nameof(Index), new { mensagem = "Registro criado!", sucesso = true });
+                else
+                    throw new Exception("Não foi possível carregar as informações!");
             }
-
-            //if (ModelState.IsValid)
-            //{
-            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await _apiToken.Obter());
-            HttpResponseMessage response = await _httpClient.PostAsJsonAsync($"{_dadosBase.Value.API_URL_BASE}Cliente", model);
-
-            if (response.IsSuccessStatusCode)
-                return RedirectToAction(nameof(Index), new { mensagem = "Registro criado!", sucesso = true });
             else
-                throw new Exception("Não foi possível carregar as informações!");
-            //}
-            //else
-            //{
-            //    TempData["erro"] = "Algum campo deve estar faltando o seu preenchimento!";
-            //    return View();
-            //}
+            {
+                TempData["erro"] = "Algum campo deve estar faltando o seu preenchimento!";
+                return View();
+            }
         }
         catch (Exception ex)
         {
@@ -107,11 +110,11 @@ public class ClienteController : Controller
     {
         try
         {
-            if (model != null)
-                model.DataAlteracao = DateTime.Now;
-
             if (ModelState.IsValid)
             {
+                if (model != null)
+                    model.DataAlteracao = DateTime.Now;
+
                 _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await _apiToken.Obter());
                 HttpResponseMessage response = await _httpClient.PutAsJsonAsync($"{_dadosBase.Value.API_URL_BASE}Cliente", model);
 

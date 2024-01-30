@@ -38,6 +38,17 @@ namespace OBarbeiro.API.Controllers
         }
 
         /// <summary>
+        /// Obter registro por identificador da tabela
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
+        [HttpGet("{email}")]
+        public async Task<List<Profissional>> GetAllForParameters([FromRoute] string email)
+        {
+            return await _profissionalNegocio.ObterTodosPorParametro(p => p.EmpresaEmail.Equals(email));
+        }
+
+        /// <summary>
         /// Incluir registro
         /// </summary>
         /// <param name="objeto"></param>
